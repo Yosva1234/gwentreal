@@ -1,16 +1,20 @@
 using TMPro;
 using UnityEngine;
-   using UnityEngine.UI;
+using UnityEngine.UI;
 
    public class ModificarTexto : MonoBehaviour
    {
-       public TMP_Text NOMBRE, LP, TIPO ;  // Variable para guardar el componente Text
-void Cambio (string nombre, string lp, string tipo){
+public scriptableobject PLANTILLA;
 
-   NOMBRE.text = nombre;
-   LP.text = lp;
-   TIPO.text = tipo;
+public TMP_Text nombre , lp , tipo;
+public Image foto;
 
+void Start(){
+
+   nombre.text =PLANTILLA.nombre;
+   lp.text = PLANTILLA.lp.ToString();
+   tipo.text = PLANTILLA.tipo;
+   foto.sprite=PLANTILLA.personaje;
 }
 
        
