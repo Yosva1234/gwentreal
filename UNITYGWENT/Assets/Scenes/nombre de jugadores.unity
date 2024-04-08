@@ -1317,8 +1317,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1191298710}
-        m_TargetAssemblyTypeName: TextManager, Assembly-CSharp
-        m_MethodName: GuardarTexto
+        m_TargetAssemblyTypeName: Cargarescena, Assembly-CSharp
+        m_MethodName: LoadSceneOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1327,7 +1327,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &1313929632
 MonoBehaviour:
   m_ObjectHideFlags: 0

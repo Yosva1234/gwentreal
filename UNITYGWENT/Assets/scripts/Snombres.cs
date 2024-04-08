@@ -1,14 +1,22 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
-public class TextManager : MonoBehaviour
+public class Cargarescena : MonoBehaviour
 {
-    public TMP_InputField J1, J2;
+    private string sceneToLoa = "CAMPO DE JUEGO";
+    public TMP_InputField J1,J2;
+    
 
-    public void GuardarTexto()
+    public void LoadSceneOnClick()
     {
-       // textoGuardado.text = inputField.text;
-       // Debug.Log("Texto guardado: " + textoGuardado);
+        SceneManager.LoadScene(sceneToLoa);
     }
+
+
+
+
 }
+
+
+
