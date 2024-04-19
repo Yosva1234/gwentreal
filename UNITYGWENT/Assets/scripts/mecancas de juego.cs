@@ -40,7 +40,13 @@ public List <GameObject> intermedia2 = new List<GameObject>();
 List <GameObject> actualizacionintermedia1 = new List<GameObject>();
 List <GameObject> actualizacionintermedia2 = new List<GameObject>();
 
-// ====================================================== mezclar ambos mazos hasta que tengan 24 cartas.
+/*
+
+ vamos a mezclar el mazo de cada jugador con 24 cartas la cual llamaremos desde el Start() y va a meter 
+ en las listas de Game Object mazo1 y mazo2 (que son los mazos del jugador1 y el jugador2 respectivamente)
+ los prefabs de las cartas correspondientes.
+
+*/
 void mezclar (int cantidad) 
 {
  for (int x=0; x<mazo.Count; x++)
@@ -66,7 +72,13 @@ void mezclar (int cantidad)
 }
 
 
-//================================================================== cuantas cartas debe robar cada jugador
+/*
+
+la funcion robar es una funcion que como su nombre lo dice roba n cartas al jugador1 si bool j1
+le mandamos el valor true de lo contrario no robara el j1 y lo mismo para el jugador 2. si ambos son true 
+pues robaran ambos.
+
+*/
 
 void robar(int n, bool j1, bool j2) {
 
@@ -107,19 +119,31 @@ void robar(int n, bool j1, bool j2) {
    }
  }
 }
-//============================================================= jugarcarta bool jugador es true si juega el jugador 1, sino es false.
-bool turno = true; // cualdo turno tiene valor true le toca jugarb al jugador 1 si es false le toca jugar al jugador 2. int n;
+// si bool turno es true pues le toca jugar al jugador 1 y si es false pues le toca al jugador 2
+bool turno = true; 
+
+// int cdpass en esta variable vamos a llevar la cuenta de cuantas veces el jugador le dio al poton de pass 
+// oooo jugo el efecto de su lider para una ves que llegue a dos veces consecutivas pues termina una ronda
+// y cada ves que juegues una carta que que no sea el lider pues esta variable se reiniciara.
 int cdepass = 0;
+
+// como su nombre lo dices esta variable vamos a usar para ver en que fila vamos a poner la carta de asedio 
+// que ha sido jugada 
 int ponerasedio=0;
+
+// en esta variable n vamos a guardar la posicion en la mano de la carta que ha sido jugada para posteriormente 
+// pasarla al campo y eliminarla de la mano
 int n;
 
+// funcion adjunta a los botones que estan en el borde de cada fila del campo de batalla para saber donde colocar 
+// la carta de asedio.
 public void dponerasedio(int x)
 {
   ponerasedio = x;
 }
 
-// ===================================================   donde poner asedio y jugarla
 
+// funcion para el efecto de las cartas de asedio de suma o resta de la fila que ha sido seleccionada
 void asedio()
 {
  detall script;
@@ -157,7 +181,7 @@ void asedio()
   ponerasedio = 0;
 }
 
-//========================================================] jugar la carta
+// funciones adjuntas a los botones de las cartas en cada mano para poder invocarlas al campo.
 public void jugarcarta (int x)
 {
   n=x;
@@ -242,20 +266,23 @@ public void jugarcarta2( )
 
 }
 
-//============================================ si n=1 entonces se activa el mk si es=2 se activa la pekka
 
-public void jugarjefe( int n )
+// funcion adjunta a los botones de las cartas jefe y el parametro m si es == a 1 pues la carta jefe que ha sido 
+// seleccionada es el mk y se activara su efecto el cual es elegir un numero de fila aleatorio del campo del contrario
+// y si esa fila tiene monstruos pues elegira uno de ellos al azar y los elimina del campo de batalla y sino 
+// tiene monstruos pues perdiste el turno. y si m == 2 pues se activa el efecto del pekka y roba una carta.
+
+public void jugarjefe( int m )
 {
 
  cdepass ++;
   
-  if(n==1)
+  if(m==1)
   {
 
     if (turno == false)  return ;
 
     System.Random random = new System.Random();
-    bool b = true; 
 
     System.Random random2 = new System.Random();
     int aux = random2.Next(1,3);
@@ -302,7 +329,7 @@ public void jugarjefe( int n )
 
   }
 
-  if (n==2)
+  if (m==2)
   {
 
    if(turno == true) return ; 
@@ -313,8 +340,8 @@ public void jugarjefe( int n )
   }
 
 }
-//========================================== funcion del boton de pasar el turno.
 
+// funcion adjunta al boton de paso de turno 
 public void pasarturno()
 {
 
@@ -328,7 +355,7 @@ public void pasarturno()
 
 }
 
-//=============================================================== START
+//funcion start de unity
 
 private void Start() 
 {
@@ -344,16 +371,12 @@ private void Start()
    
 }
 
-//====================================================== actualizacion en cada frame de las cartas
 
 
+// actualizacion del campo de batalla completo en cada frame del jugo
 void actualizacion()
 {
-
-
  
- // actualizar la imagen que tapan las cartas en cada turno.
-
   if(turno)
   {
     taparcarta1.enabled = false;
@@ -369,9 +392,6 @@ void actualizacion()
     jefe1.GetComponent<Image>().enabled = false;
     jefe2.GetComponent<Image>().enabled = true;
   }
-
-  // actualicemos los puntajes en cada frame; 
-  // puntage del j1.
 
   int c=0;
 
@@ -430,7 +450,6 @@ void actualizacion()
   
   puntaje1.text = c.ToString();
 
-  // puntage del j2.
   c=0;
  
    
@@ -661,7 +680,7 @@ void actualizacion()
 
 
 }
-// ============================================== limpiar todo el campo de ambos jugadores;
+// funcion para limpiar todo el campo de ser necesario.
 void limpiarcampo()
 {
 
@@ -679,7 +698,7 @@ void limpiarcampo()
  valorintermedio2.Clear();
 }
   
-//===============================================verificar quien gana en una partida.
+// verificar si alguien gano alguna partida
 void ganar()
 {
  if(cdepass==2)
@@ -711,10 +730,12 @@ void ganar()
     limpiarcampo();
     robar(2, true, true);
     cdepass=0;
+    juegoacabado(); 
  }
 
 }
 
+// erificar si alguno de los jugadores gano el juego
 void juegoacabado()
 {
   if(partidasj1.text == partidasj2.text && partidasj1.text == "2")
@@ -736,13 +757,12 @@ void juegoacabado()
 
 }
 
-
-
+// funcion Update de Unity.
 private void Update() 
 {
   actualizacion();
   ganar();   
-  juegoacabado(); 
+
 }
 }
 }
