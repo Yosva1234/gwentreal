@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1964b484dd4bf7f4e9dd96845b5041be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: nombre de jugadores
+  sceneToLoad: CAMPO DE JUEGO
 --- !u!4 &203009992
 Transform:
   m_ObjectHideFlags: 0
