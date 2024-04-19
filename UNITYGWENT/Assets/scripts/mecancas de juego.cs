@@ -69,6 +69,30 @@ void mezclar (int cantidad)
    mazo2.RemoveAt(n);
  }
 
+ for (int x = 0; x< 20; x++)
+ {
+   System.Random random1 = new System.Random();
+   int n1 = random1.Next(0,mazo1.Count-1);
+   System.Random random2 = new System.Random();
+   int n2 = random2.Next(0,mazo1.Count-1);
+   
+   GameObject aux = mazo1[n1];
+   mazo1[n1] = mazo1[n2];
+   mazo1[n2] = aux;
+ }
+
+  for (int x = 0; x< 20; x++)
+ {
+   System.Random random1 = new System.Random();
+   int n1 = random1.Next(0,mazo2.Count-1);
+   System.Random random2 = new System.Random();
+   int n2 = random2.Next(0,mazo2.Count-1);
+   
+   GameObject aux = mazo2[n1];
+   mazo2[n1] = mazo2[n2];
+   mazo2[n2] = aux;
+ }
+
 }
 
 
