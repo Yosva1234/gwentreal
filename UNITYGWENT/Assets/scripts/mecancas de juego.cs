@@ -5,13 +5,14 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 
-namespace Program{
-public class campo : MonoBehaviour 
+
+public class campo : MonoBehaviour
 {
 
-public TMP_Text puntaje1, puntaje2, partidasj1, partidasj2;
+public TMP_Text puntaje1, puntaje2, partidasj1, partidasj2, tipodecarta;
 public Image taparcarta1, taparcarta2, cartagrande;
 public Button jefe1, jefe2;
 public List <GameObject> mazo = new List<GameObject>();
@@ -69,7 +70,7 @@ void mezclar (int cantidad)
    mazo2.RemoveAt(n);
  }
 
- for (int x = 0; x< 20; x++)
+ for (int x = 0; x< 40; x++)
  {
    System.Random random1 = new System.Random();
    int n1 = random1.Next(0,mazo1.Count-1);
@@ -81,7 +82,7 @@ void mezclar (int cantidad)
    mazo1[n2] = aux;
  }
 
-  for (int x = 0; x< 20; x++)
+  for (int x = 0; x< 40; x++)
  {
    System.Random random1 = new System.Random();
    int n1 = random1.Next(0,mazo2.Count-1);
@@ -240,12 +241,12 @@ public void jugarcarta2( )
    if(script.tipo == 'a' ) 
    {
      if (ponerasedio == 0 ) 
-     goto salto1;
+     return ;
      asedio();
    }
-
+   
+   ponerasedio = 0;
    actualizacionmano1.RemoveAt(n-1);
-   salto1:
    turno = false;
 
    return ;
@@ -277,16 +278,18 @@ public void jugarcarta2( )
    {
 
      if (ponerasedio == 0 ) 
-     goto salto2;
+     return;
 
      asedio();
     }
-   
+   ponerasedio = 0;
    actualizacionmano2.RemoveAt(n-1);
-   salto2:
    turno = true;
+   
 
   }
+
+
 
 }
 
@@ -368,7 +371,6 @@ public void jugarjefe( int m )
 // funcion adjunta al boton de paso de turno 
 public void pasarturno()
 {
-
  cdepass++;
 
  if(!turno)
@@ -384,6 +386,8 @@ public void pasarturno()
 private void Start() 
 {
 
+  turno = true;
+
  puntaje1.text = "0";
  puntaje2.text = "0";
  partidasj1.text = "0";
@@ -397,7 +401,56 @@ private void Start()
 
 
 
-// actualizacion del campo de batalla completo en cada frame del jugo
+void funcionatualizar(List <GameObject> listvisual , List <GameObject> listaaux){
+
+
+  for(int x=0 ; x<listaaux.Count ; x++)
+  {
+   Button aux = listvisual[x].GetComponentInChildren<Button>();
+
+   if(!aux.GetComponent<Image>().enabled) 
+   aux.GetComponent<Image>().enabled = true;
+
+   Button aux2 = listaaux[x].GetComponentInChildren<Button>();
+   aux.image.sprite = aux2.image.sprite;
+  }
+
+  for(int x = listaaux.Count; x < listvisual.Count; x++)
+  {
+    Button aux = listvisual[x].GetComponentInChildren<Button>();
+    aux.GetComponent<Image>().enabled = false;
+  }
+
+
+}
+
+
+int actualizarpuntos( List <int> listaval, List <GameObject> listavisual)
+{
+
+  int c =0;
+
+  for(int x=0; x< listaval.Count; x++)
+  {
+    salto:
+
+    if(listaval.Count == x)
+    break;
+
+    if(listaval[x]<=0)
+    {
+      listavisual.RemoveAt(x);
+      listaval.RemoveAt(x);
+
+      goto salto;
+    }
+    c+=listaval[x];
+  }
+
+  return c;
+
+}
+
 void actualizacion()
 {
  
@@ -419,291 +472,52 @@ void actualizacion()
 
   int c=0;
 
-  for (int x = 0 ; x < valorcuerpoacuerpo1.Count ; x++)
-  {
-   salto1:
+ c+= actualizarpuntos(valorcuerpoacuerpo1,actualizacioncuarpoacuerpo1);
 
-    if(valorcuerpoacuerpo1.Count == x)
-     break;
+ c+= actualizarpuntos(valordistancia1, actualizaciondistancia1);
 
-    if(valorcuerpoacuerpo1[x]<=0)
-    {
-      actualizacioncuarpoacuerpo1.RemoveAt(x);
-      valorcuerpoacuerpo1.RemoveAt(x);
+ c+= actualizarpuntos(valorintermedio1, actualizacionintermedia1);
 
-      goto salto1;
-    }
-
-    c+=valorcuerpoacuerpo1[x];
-  }
-
-  for (int x =0; x< valordistancia1.Count ; x++)
-  {
-    salto2:
-
-    if(valordistancia1.Count == x) 
-    break;
-
-    if(valordistancia1[x]<=0)
-    {
-      actualizaciondistancia1.RemoveAt(x);
-      valordistancia1.RemoveAt(x);
-
-      goto salto2;
-    }
-    c+=valordistancia1[x];
-  }
-
-  for(int x=0; x< valorintermedio1.Count; x++)
-  {
-    salto3:
-
-    if(valorintermedio1.Count == x) 
-    break;
-
-    if(valorintermedio1[x]<=0)
-    {
-      actualizacionintermedia1.RemoveAt(x);
-      valorintermedio1.RemoveAt(x);
-
-      goto salto3;
-    }
-
-    c+=valorintermedio1[x];
-  }
-  
   puntaje1.text = c.ToString();
 
   c=0;
- 
-   
-  for (int x = 0 ; x < valorcuerpoacuerpo2.Count ; x++)
-  {
-    salto4:
 
-    if(valorcuerpoacuerpo2.Count == x)
-    break;
+ c+= actualizarpuntos(valorcuerpoacuerpo2,actualizacioncuerpoacuerpo2);
 
-    if(valorcuerpoacuerpo2[x]<=0)
-    {
-      actualizacioncuerpoacuerpo2.RemoveAt(x);
-      valorcuerpoacuerpo2.RemoveAt(x);
+ c+= actualizarpuntos(valordistancia2, actualizaciondistancia2);
 
-      goto salto4;
-    }
+ c+= actualizarpuntos(valorintermedio2, actualizacionintermedia2);
 
-    c+=valorcuerpoacuerpo2[x];
-  }
-
-  for (int x =0; x< valordistancia2.Count ; x++)
-  {
-    salto5:
-    if(valordistancia2.Count == x)
-    break;
-    
-    if(valordistancia2[x]<=0)
-    {
-      actualizaciondistancia2.RemoveAt(x);
-      valordistancia2.RemoveAt(x);
-
-      goto salto5;
-    }
-
-    c+=valordistancia2[x];
-  }
-
-  for(int x=0; x< valorintermedio2.Count; x++)
-  {
-    salto6:
-
-    if(valorintermedio2.Count == x)
-    break;
-
-    if(valorintermedio2[x]<=0)
-    {
-      actualizacionintermedia2.RemoveAt(x);
-      valorintermedio2.RemoveAt(x);
-
-      goto salto6;
-    }
-    c+=valorintermedio2[x];
-  }
-  
   puntaje2.text = c.ToString();
 
   // actualizamos la mano del jugador 1 en cada frame.
 
-  for(int x=0 ; x<actualizacionmano1.Count ; x++)
-  {
-   Button aux = manodeljugador1[x].GetComponentInChildren<Button>();
-
-   if(!aux.GetComponent<Image>().enabled)
-   aux.GetComponent<Image>().enabled = true;
-
-   Button aux2 = actualizacionmano1[x].GetComponentInChildren<Button>();
-   aux.image.sprite = aux2.image.sprite;
-  }
-
-  for(int x = actualizacionmano1.Count; x < manodeljugador1.Count; x++)
-  {
-    Button aux = manodeljugador1[x].GetComponentInChildren<Button>();
-    aux.GetComponent<Image>().enabled = false;
-  }
+ funcionatualizar(manodeljugador1, actualizacionmano1);
 
   // actualizamos la mano del jugador 2 en cada frame.
 
-  for(int x=0 ; x<actualizacionmano2.Count ; x++)
-  {
-   Button aux = manodeljugador2[x].GetComponentInChildren<Button>();
+  funcionatualizar(manodeljugador2, actualizacionmano2);
 
-   if(!aux.GetComponent<Image>().enabled) 
-   aux.GetComponent<Image>().enabled = true;
+   // actualizemos la fila de ataque cuerpo a cuerpo del jugador 1.
 
-   Button aux2 = actualizacionmano2[x].GetComponentInChildren<Button>();
-   aux.image.sprite = aux2.image.sprite;
-  }
+  funcionatualizar(cuerpoacuerpo1, actualizacioncuarpoacuerpo1);
+   // actualizemos la fila de ataque cuerpo a cuerpo del jugador 2.
 
-  for(int x = actualizacionmano2.Count; x < manodeljugador2.Count; x++)
-  {
-    Button aux = manodeljugador2[x].GetComponentInChildren<Button>();
-    aux.GetComponent<Image>().enabled = false;
-  }
+    funcionatualizar(cuerpoacuerpo2, actualizacioncuerpoacuerpo2);
+   // actualizemos la fila de ataque a distancia del jugador 1.
 
- // actualizemos la fila de ataque cuerpo a cuerpo del jugador 1.
+    funcionatualizar (distancia1, actualizaciondistancia1);
 
-  for(int x=0 ; x<actualizacioncuarpoacuerpo1.Count ; x++)
-  {
-   Button aux = cuerpoacuerpo1[x].GetComponentInChildren<Button>();
-
-   if(!aux.GetComponent<Image>().enabled)
-   aux.GetComponent<Image>().enabled = true;
-
-   Button aux2 = actualizacioncuarpoacuerpo1[x].GetComponentInChildren<Button>();
-   aux.image.sprite = aux2.image.sprite;
-  }
-
-  for(int x = actualizacioncuarpoacuerpo1.Count; x < cuerpoacuerpo1.Count; x++)
-  {
-    Button aux = cuerpoacuerpo1[x].GetComponentInChildren<Button>();
-    aux.GetComponent<Image>().enabled = false;
-  }
-
-  // actualizemos la fila de ataque cuerpo a cuerpo del jugador 2.
-
-  for(int x=0 ; x<actualizacioncuerpoacuerpo2.Count ; x++)
-  {
-   Button aux = cuerpoacuerpo2[x].GetComponentInChildren<Button>();
-
-   if(!aux.GetComponent<Image>().enabled) 
-   aux.GetComponent<Image>().enabled = true;
-
-   Button aux2 = actualizacioncuerpoacuerpo2[x].GetComponentInChildren<Button>();
-   aux.image.sprite = aux2.image.sprite;
-  }
-
-  for(int x = actualizacioncuerpoacuerpo2.Count; x < cuerpoacuerpo2.Count; x++)
-  {
-    Button aux = cuerpoacuerpo2[x].GetComponentInChildren<Button>();
-    aux.GetComponent<Image>().enabled = false;
-  }
-
- // actualizemos la fila de ataque a distancia del jugador 1.
-
-  for(int x=0 ; x<actualizaciondistancia1.Count ; x++)
-  {
-    Button aux = distancia1[x].GetComponentInChildren<Button>();
-
-    if(!aux.GetComponent<Image>().enabled)
-    aux.GetComponent<Image>().enabled = true;
-
-    Button aux2 = actualizaciondistancia1[x].GetComponentInChildren<Button>();
-    aux.image.sprite = aux2.image.sprite;
-  }
-
-  for(int x = actualizaciondistancia1.Count; x < distancia1.Count; x++)
-  {
-    Button aux = distancia1[x].GetComponentInChildren<Button>();
-    aux.GetComponent<Image>().enabled = false;
-  }
+   // actualizemos la fila de ataque a distancia del jugador 2.
+    funcionatualizar (distancia2, actualizaciondistancia2);
   
-  // actualizemos la fila de ataque a distancia del jugador 2.
-
-  for(int x=0 ; x<actualizaciondistancia2.Count ; x++)
-  {
-   Button aux = distancia2[x].GetComponentInChildren<Button>();
-
-   if(!aux.GetComponent<Image>().enabled)
-    aux.GetComponent<Image>().enabled = true;
-
-   Button aux2 =  actualizaciondistancia2[x].GetComponentInChildren<Button>();
-   aux.image.sprite = aux2.image.sprite;
-  }
-
-  for(int x = actualizaciondistancia2.Count; x < distancia2.Count; x++)
-  {
-    Button aux = distancia2[x].GetComponentInChildren<Button>();
-    aux.GetComponent<Image>().enabled = false;
-  }
-
    // actualizemos la fila de ataque intermedio del jugador 1.
+   funcionatualizar(intermedia1, actualizacionintermedia1);
 
-  for(int x=0 ; x<actualizacionintermedia1.Count ; x++)
-  {
-   Button aux = intermedia1[x].GetComponentInChildren<Button>();
-
-   if(!aux.GetComponent<Image>().enabled)
-   aux.GetComponent<Image>().enabled = true;
-
-   Button aux2 = actualizacionintermedia1[x].GetComponentInChildren<Button>();
-   aux.image.sprite = aux2.image.sprite;
-  }
-
-  for(int x = actualizacionintermedia1.Count; x < intermedia1.Count; x++)
-  {
-    Button aux = intermedia1[x].GetComponentInChildren<Button>();
-    aux.GetComponent<Image>().enabled = false;
-  }
-
-  // actualizemos la fila de ataque intermedio del jugador 1.
-
-  for(int x=0 ; x<actualizacionintermedia1.Count ; x++)
-  {
-    Button aux = intermedia1[x].GetComponentInChildren<Button>();
-
-    if(!aux.GetComponent<Image>().enabled) 
-    aux.GetComponent<Image>().enabled = true;
-
-    Button aux2 = actualizacionintermedia1[x].GetComponentInChildren<Button>();
-    aux.image.sprite = aux2.image.sprite;
-  }
-
-  for(int x = actualizacionintermedia1.Count; x < intermedia1.Count; x++)
-  {
-    Button aux = intermedia1[x].GetComponentInChildren<Button>();
-    aux.GetComponent<Image>().enabled = false;
-  }
-
- // actualizemos la fila de ataque intermedio del jugador 2.
-
-  for(int x=0 ; x<actualizacionintermedia2.Count ; x++)
-  {
-   Button aux = intermedia2[x].GetComponentInChildren<Button>();
-
-   if(!aux.GetComponent<Image>().enabled)
-    aux.GetComponent<Image>().enabled = true;
-
-   Button aux2 = actualizacionintermedia2[x].GetComponentInChildren<Button>();
-    aux.image.sprite = aux2.image.sprite;
-  }
-
-  for(int x = actualizacionintermedia2.Count; x < intermedia2.Count; x++)
-  {
-    Button aux = intermedia2[x].GetComponentInChildren<Button>();
-    aux.GetComponent<Image>().enabled = false;
-  }
-
-
+   // actualizemos la fila de ataque intermedio del jugador 2.
+   funcionatualizar(intermedia2 , actualizacionintermedia2);
 }
+
 // funcion para limpiar todo el campo de ser necesario.
 void limpiarcampo()
 {
@@ -783,10 +597,40 @@ void juegoacabado()
 
 // funcion Update de Unity.
 private void Update() 
+
 {
   actualizacion();
   ganar();   
 
 }
+
+ public void mostrarcasrta (int n){
+
+  Button aux;
+  detall script;
+
+  if(turno)
+  {
+    aux = manodeljugador1[n-1].GetComponentInChildren<Button>();
+    script = actualizacionmano1[n-1].GetComponent<detall>();
+  } 
+  else
+  {
+    aux =  manodeljugador2[n-1].GetComponentInChildren<Button>();
+    script = actualizacionmano2[n-1].GetComponent<detall>();
+  } 
+
+  cartagrande.GetComponent<Image>().enabled = true;
+  cartagrande.sprite = aux.image.sprite;
+  tipodecarta.text += script.tipo;
+
 }
+
+public void quitarcartagrande()
+{
+  cartagrande.GetComponent<Image>().enabled = false;
+  tipodecarta.text="";
+
+}
+
 }
