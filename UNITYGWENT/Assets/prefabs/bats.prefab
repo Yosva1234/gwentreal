@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 2
   tipo: 105
+  nombrecarta: bats
 --- !u!1 &5776292244523367886
 GameObject:
   m_ObjectHideFlags: 0

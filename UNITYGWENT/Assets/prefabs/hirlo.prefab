@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 2
   tipo: 97
+  nombrecarta: hielo
 --- !u!1 &6887904431539731582
 GameObject:
   m_ObjectHideFlags: 0

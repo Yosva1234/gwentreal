@@ -6,4 +6,6 @@ public class detall : MonoBehaviour
 {
    public int LP;
    public char tipo;
+   public string nombrecarta;
+
 }

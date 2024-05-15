@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 5
   tipo: 100
+  nombrecarta: reina arquera
 --- !u!1 &4458612279992985637
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 5
   tipo: 105
+  nombrecarta: globo
 --- !u!1 &6007056373667105768
 GameObject:
   m_ObjectHideFlags: 0

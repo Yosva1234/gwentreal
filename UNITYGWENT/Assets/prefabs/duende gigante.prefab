@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 6
   tipo: 99
+  nombrecarta: duende gigante
 --- !u!1 &8162531808050772238
 GameObject:
   m_ObjectHideFlags: 0

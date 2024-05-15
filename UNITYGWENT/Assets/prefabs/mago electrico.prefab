@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 4
   tipo: 105
+  nombrecarta: mago electrico
 --- !u!1 &7961238712595751507
 GameObject:
   m_ObjectHideFlags: 0

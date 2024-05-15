@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 4
   tipo: 99
+  nombrecarta: tronco de barbaro
 --- !u!1 &6768802124959537280
 GameObject:
   m_ObjectHideFlags: 0

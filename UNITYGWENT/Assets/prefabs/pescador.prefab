@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 3
   tipo: 100
+  nombrecarta: peskador
 --- !u!1 &7207848303679542080
 GameObject:
   m_ObjectHideFlags: 0

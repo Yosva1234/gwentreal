@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 3
   tipo: 100
+  nombrecarta: arqueras
 --- !u!1 &7224315301829415435
 GameObject:
   m_ObjectHideFlags: 0

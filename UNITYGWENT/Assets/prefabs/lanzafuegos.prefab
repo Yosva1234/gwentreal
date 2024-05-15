@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 3
   tipo: 100
+  nombrecarta: lanzafuegos
 --- !u!1 &3786492060863001361
 GameObject:
   m_ObjectHideFlags: 0

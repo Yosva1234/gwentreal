@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 6
   tipo: 97
+  nombrecarta: bola de nieve
 --- !u!1 &9001141539005192760
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,9 +12,11 @@ using UnityEngine.EventSystems;
 public class campo : MonoBehaviour
 {
 
-public TMP_Text puntaje1, puntaje2, partidasj1, partidasj2, tipodecarta;
-public Image taparcarta1, taparcarta2, cartagrande;
+public TMP_Text puntaje1, puntaje2, partidasj1, partidasj2;
+public Image taparcarta1, taparcarta2, cartagrande, tipodecarta;
+public Sprite muestracartaponerasedio, cartacuerpoacuerpo, cartadistancia, cartaintermedia;
 public Button jefe1, jefe2;
+public List <Button> asediobutton = new List<Button> ();
 public List <GameObject> mazo = new List<GameObject>();
 List <GameObject> mazo1 = new List<GameObject>();
 List <GameObject> mazo2 = new List<GameObject>();
@@ -117,7 +119,9 @@ void robar(int n, bool j1, bool j2) {
    c = Math.Min( n, Math.Abs(manodeljugador1.Count - c));
 
    for (int x=0;  x<c; x++)
-   {
+   { 
+     Button aux3 = manodeljugador1[actualizacionmano1.Count].GetComponentInChildren<Button>();
+     aux3.GetComponent<Image>().enabled = true;
      actualizacionmano1.Add(mazo1[0]);
      Button aux  = actualizacionmano1[actualizacionmano1.Count-1].GetComponentInChildren<Button>();
      Button aux2 = mazo1[0].GetComponentInChildren<Button>();
@@ -136,6 +140,8 @@ void robar(int n, bool j1, bool j2) {
 
    for (int x=0;  x<c; x++)
    {
+     Button aux3 = manodeljugador2[actualizacionmano2.Count].GetComponentInChildren<Button>();
+     aux3.GetComponent<Image>().enabled = true;
      actualizacionmano2.Add(mazo2[0]);
      Button aux  = actualizacionmano2[actualizacionmano2.Count-1].GetComponentInChildren<Button>();
      Button aux2 = mazo2[0].GetComponentInChildren<Button>();
@@ -171,13 +177,24 @@ public void dponerasedio(int x)
 // funcion para el efecto de las cartas de asedio de suma o resta de la fila que ha sido seleccionada
 void asedio()
 {
+ 
  detall script;
 
  if(turno)
- script = actualizacionmano1[n-1].GetComponent<detall>();
+ {
+   script = actualizacionmano1[n-1].GetComponent<detall>();
+   Button aux = actualizacionmano1[n-1].GetComponentInChildren<Button>();
+   asediobutton[ponerasedio-1].image.sprite = aux.image.sprite;
+ }
+ 
   
   else 
-  script = actualizacionmano2[n-1].GetComponent<detall>();
+  {
+     script = actualizacionmano2[n-1].GetComponent<detall>();
+     Button aux = actualizacionmano2[n-1].GetComponentInChildren<Button>();
+     asediobutton[ponerasedio-1].image.sprite = aux.image.sprite;
+  }
+ 
 
   if (ponerasedio == 6)
    for (int x=0; x<valorintermedio1.Count; x++)
@@ -202,9 +219,236 @@ void asedio()
   if(ponerasedio == 1)
     for(int x=0; x<valorintermedio2.Count; x++)
      valorintermedio2[x]+=script.LP;
-         
+
+       
   ponerasedio = 0;
 }
+
+
+// funciones correspondientes a las cartas de senuelo
+bool toquesenuelo = false;
+
+// en esta funcion vamos a apagar o encender las imagenes de las cartas en el campo 
+// en dependencia de las necesidades
+  void onofcard(List <GameObject> lista, int size , bool b)
+  {
+    for (int x = 0; x < size ; x++)
+    {
+      Button aux = lista[x].GetComponentInChildren<Button>();
+      aux.GetComponent<Image>().enabled = b;
+    }
+  }
+
+// en esta funcion vamos a usar la funcion onofcard para apagar y encenderlas cartas 
+// necesarias para que el senuelo pueda hacer el swap
+void senuelo(detall script){
+
+ toquesenuelo = true;
+ 
+  char c = script.tipo;
+
+    onofcard(cuerpoacuerpo1,actualizacioncuarpoacuerpo1.Count, false);
+  
+    onofcard(cuerpoacuerpo2, actualizacioncuerpoacuerpo2.Count, false);
+
+    onofcard(distancia1, actualizaciondistancia1.Count, false);
+
+    onofcard(distancia2, actualizaciondistancia2.Count, false);
+
+    onofcard(intermedia1, actualizacionintermedia1.Count, false);
+  
+    onofcard(intermedia2, actualizacionintermedia2.Count, false);
+
+    onofcard(manodeljugador1, actualizacionmano1.Count, false);
+
+    onofcard(manodeljugador2, actualizacionmano2.Count, false);
+
+  if( c == 'c')
+  {
+      if (turno) 
+      onofcard(cuerpoacuerpo1, actualizacioncuarpoacuerpo1.Count, true);
+
+      else
+      onofcard(cuerpoacuerpo2, actualizacioncuerpoacuerpo2.Count, true);
+  }
+
+  if( c == 'd' )
+  {
+    if (turno) 
+    onofcard(distancia1 , actualizaciondistancia1.Count, true);
+
+    else
+     onofcard(distancia2, actualizaciondistancia2.Count, true);
+
+  if( c == 'i' )
+  {
+    if (turno)  
+   onofcard(intermedia1, actualizacionintermedia1.Count, true);
+   
+   else
+   onofcard(intermedia2, actualizacionintermedia2.Count, true);
+  } 
+
+}
+}
+
+public void efectocampo( int x )
+{
+
+  if (toquesenuelo)
+  {
+     
+    detall script;
+    GameObject botoncampo = mazo[0];
+    Button aux;
+  
+    if(turno) 
+    {
+      script = actualizacionmano1[n-1].GetComponent<detall>();
+      
+      if (script.tipo == 'c') 
+      {
+        aux = cuerpoacuerpo1[actualizacioncuarpoacuerpo1.Count].GetComponentInChildren<Button>();
+        aux.GetComponent<Image>().enabled = true;
+        invocarcarta( actualizacioncuarpoacuerpo1, valorcuerpoacuerpo1);
+        botoncampo = actualizacioncuarpoacuerpo1[x-1];
+        valorcuerpoacuerpo1[x-1]=-1;
+      }
+
+
+      if(script.tipo == 'd')
+      {
+        aux = distancia1[actualizaciondistancia1.Count].GetComponentInChildren<Button>();
+        aux.GetComponent<Image>().enabled = true;
+        invocarcarta( actualizaciondistancia1,valordistancia1);
+        botoncampo = actualizaciondistancia1[x-1];
+        valordistancia1[x-1]=-1;
+      }
+      if(script.tipo == 'i')
+      {
+        aux = intermedia1[actualizacionintermedia1.Count].GetComponentInChildren<Button>();
+        aux.GetComponent<Image>().enabled = true;
+        invocarcarta (actualizacionintermedia1, valorintermedio1);
+        botoncampo = actualizacionintermedia1[x-1];
+        valorintermedio1[x-1]=-1;
+      }
+
+      mazo1.Insert(0 , botoncampo);
+      robar(1,true,false);
+
+      turno = false;
+
+    }
+    else
+    {
+      script = actualizacionmano2[n-1].GetComponent<detall>();
+      
+      if (script.tipo == 'c') 
+      {
+        aux = cuerpoacuerpo2[actualizacioncuerpoacuerpo2.Count].GetComponentInChildren<Button>();
+        aux.GetComponent<Image>().enabled = true;
+        invocarcarta( actualizacioncuerpoacuerpo2, valorcuerpoacuerpo2);
+        botoncampo = actualizacioncuerpoacuerpo2[x-1];
+        valorcuerpoacuerpo2[x-1]=-1;
+      }
+
+
+      if(script.tipo == 'd')
+      {
+        aux = distancia2[actualizaciondistancia2.Count].GetComponentInChildren<Button>();
+        aux.GetComponent<Image>().enabled = true;
+        invocarcarta( actualizaciondistancia2,valordistancia2);
+        botoncampo = actualizaciondistancia2[x-1];
+        valordistancia2[x-1]=-1;
+      }
+      if(script.tipo == 'i')
+      {
+        aux = intermedia2[actualizacionintermedia2.Count].GetComponentInChildren<Button>();
+        aux.GetComponent<Image>().enabled = true;
+        invocarcarta (actualizacionintermedia2, valorintermedio2);
+        botoncampo = actualizacionintermedia2[x-1];
+        valorintermedio2[x-1]=-1;
+      }
+
+      mazo2.Insert(0 , botoncampo);
+      robar(1,false,true);
+
+      turno = true;
+
+    } 
+  
+    onofcard(cuerpoacuerpo1,actualizacioncuarpoacuerpo1.Count, true);
+  
+    onofcard(cuerpoacuerpo2, actualizacioncuerpoacuerpo2.Count, true);
+
+    onofcard(distancia1, actualizaciondistancia1.Count, true);
+
+    onofcard(distancia2, actualizaciondistancia2.Count, true);
+
+    onofcard(intermedia1, actualizacionintermedia1.Count, true);
+  
+    onofcard(intermedia2, actualizacionintermedia2.Count, true);
+
+    onofcard(manodeljugador1, actualizacionmano1.Count, true);
+
+    onofcard(manodeljugador2, actualizacionmano2.Count, true);
+
+    toquesenuelo = false;
+
+  }
+
+}
+
+// esta funcion pone una carta del deck directamente en la mano
+void ponercartamano(List<GameObject> deck , string name)
+{
+    
+    for (int x = 0; x<deck.Count ; x++)
+    {
+        detall aux = deck[x].GetComponent<detall>();
+        if( aux.nombrecarta == name )
+        {
+           if(turno)
+           {
+            mazo1.Insert(0,deck[x]);
+            robar(1,true,false);
+            //deck.RemoveAt(x+1);
+           }
+           else
+           {
+             mazo2.Insert(0,deck[x]);
+             robar(1,false,true);
+           } 
+           return ;
+        }
+    }
+}
+
+// funcion utilizada para invocar cartas
+void invocarcarta(  List <GameObject> campo, List <int> val )
+{
+
+  detall script ;
+
+  if (turno)
+  {
+    script = actualizacionmano1[n-1].GetComponent<detall>();
+    val.Add(script.LP);
+    campo.Add(actualizacionmano1[n-1]);
+    actualizacionmano1.RemoveAt(n-1);
+  }
+
+  else
+  {
+    script = actualizacionmano2[n-1].GetComponent<detall>();
+    val.Add(script.LP);
+    campo.Add(actualizacionmano2[n-1]);
+    actualizacionmano2.RemoveAt(n-1);
+  }
+
+
+}
+
 
 // funciones adjuntas a los botones de las cartas en cada mano para poder invocarlas al campo.
 public void jugarcarta (int x)
@@ -216,26 +460,46 @@ public void jugarcarta2( )
 { 
  cdepass = 0;
 
+
  if (turno)
  {
    detall script = actualizacionmano1[n-1].GetComponent<detall>();
+    
+   if ( script.tipo != 'a' && script.LP == 0) 
+   {
+     senuelo(script);
+     return;
+   }
 
    if(script.tipo == 'c' ) 
    {
+    if(actualizacioncuarpoacuerpo1.Count >=8 ) return ;
+     // si tiene 0 ptos de vida pues seria un senuelo.
      actualizacioncuarpoacuerpo1.Add(actualizacionmano1[n-1]);
      valorcuerpoacuerpo1.Add(script.LP);
+     Button aux =  cuerpoacuerpo1[actualizacioncuarpoacuerpo1.Count-1].GetComponentInChildren<Button>();
+     aux.GetComponent<Image>().enabled = true;
    }
+    
 
    if(script.tipo == 'd' ) 
    {
+    if(actualizaciondistancia1.Count >= 8) return ;
+
      actualizaciondistancia1.Add(actualizacionmano1[n-1]);
      valordistancia1.Add(script.LP);
+      Button aux =  distancia1[actualizaciondistancia1.Count-1].GetComponentInChildren<Button>();
+     aux.GetComponent<Image>().enabled = true;
    }
 
    if(script.tipo == 'i' )
    {
+    if(actualizacionintermedia1.Count >= 8) return ;
+
      actualizacionintermedia1.Add(actualizacionmano1[n-1]);
      valorintermedio1.Add(script.LP);
+     Button aux =  intermedia1[actualizacionintermedia1.Count-1].GetComponentInChildren<Button>();
+     aux.GetComponent<Image>().enabled = true;
    }
 
    if(script.tipo == 'a' ) 
@@ -247,6 +511,7 @@ public void jugarcarta2( )
    
    ponerasedio = 0;
    actualizacionmano1.RemoveAt(n-1);
+   efectoinvocar(script);
    turno = false;
 
    return ;
@@ -256,22 +521,40 @@ public void jugarcarta2( )
   {
    detall script = actualizacionmano2[n-1].GetComponent<detall>();
 
+   if ( script.tipo != 'a' && script.LP == 0) 
+   {
+     senuelo(script);
+     return;
+   }
+
    if(script.tipo == 'c' ) 
    {
+    if(actualizacioncuerpoacuerpo2.Count >= 8 ) return ;
+
      actualizacioncuerpoacuerpo2.Add(actualizacionmano2[n-1]);
      valorcuerpoacuerpo2.Add(script.LP);
+     Button aux =  cuerpoacuerpo2[actualizacioncuerpoacuerpo2.Count-1].GetComponentInChildren<Button>();
+     aux.GetComponent<Image>().enabled = true;
    }
 
    if(script.tipo == 'd' )
    {
+    if(actualizaciondistancia2.Count >= 8) return ;
+
      actualizaciondistancia2.Add(actualizacionmano2[n-1]);
      valordistancia2.Add(script.LP);
+      Button aux =  distancia2[actualizaciondistancia2.Count-1].GetComponentInChildren<Button>();
+     aux.GetComponent<Image>().enabled = true;
    }
 
    if(script.tipo == 'i' ) 
    {
+    if(actualizacionintermedia2.Count >= 8) return ;
+
      actualizacionintermedia2.Add(actualizacionmano2[n-1]);
      valorintermedio2.Add(script.LP);
+     Button aux =  intermedia2[actualizacionintermedia2.Count-1].GetComponentInChildren<Button>();
+     aux.GetComponent<Image>().enabled = true;
    }
 
    if(script.tipo == 'a' )
@@ -282,15 +565,186 @@ public void jugarcarta2( )
 
      asedio();
     }
+
    ponerasedio = 0;
    actualizacionmano2.RemoveAt(n-1);
+   efectoinvocar(script);
    turno = true;
-   
-
   }
 
 
 
+}
+
+// funciones ligadas a los efectos de morir e invocar 
+void efectoinvocar(detall script){
+
+  string nombre = script.nombrecarta;
+  
+  if( nombre == "barbaros de elite")
+  {
+    if(turno) 
+    {
+      Button aux = cuerpoacuerpo1[actualizacioncuarpoacuerpo1.Count].GetComponentInChildren<Button>();
+      aux.GetComponent<Image>().enabled = true;
+      actualizacioncuarpoacuerpo1.Add(actualizacioncuarpoacuerpo1[actualizacioncuarpoacuerpo1.Count-1]);
+      valorcuerpoacuerpo1.Add(script.LP);
+    }
+
+    else
+    {
+      Button aux = cuerpoacuerpo2[actualizacioncuerpoacuerpo2.Count].GetComponentInChildren<Button>();
+      aux.GetComponent<Image>().enabled = true;
+      actualizacioncuerpoacuerpo2.Add(actualizacioncuerpoacuerpo2[actualizacioncuerpoacuerpo2.Count-1]);
+      valorcuerpoacuerpo2.Add(script.LP);
+    }
+  }
+
+  if( nombre == "espiritu electrico")
+  {     
+    ponercartamano(mazo,"gigante electrico");
+    
+  }
+ 
+  if( nombre == "espiritu de fuego")
+  {
+    ponercartamano(mazo,"cohete");
+  }
+
+  if( nombre == "golem")
+  {
+    int c = 0;
+    char c1 = '0' ;
+    int pos = int.MaxValue;
+
+    if (turno)
+    {
+     
+      for (int x = 0 ; x < valordistancia1.Count; x++)
+    {
+       if (valordistancia1[x] > c )
+        {
+          c = valordistancia1[x];
+          c1 = 'd';
+          pos = x;
+        }
+    }
+
+    for (int x = 0 ; x < valorintermedio1.Count; x++)
+    {
+       if (valorintermedio1[x] > c )
+        {
+          c = valorintermedio1[x];
+          c1 = 'i';
+          pos = x;
+        }
+    }
+
+      if (pos == int.MaxValue) return ;
+
+      if(c1 == 'd')   valordistancia1[pos] = -1;
+      if(c1 == 'i')   valorintermedio1[pos] = -1;  
+
+    }
+
+    else 
+    {
+    
+      for (int x = 0 ; x < valordistancia2.Count; x++)
+    {
+       if (valordistancia2[x] > c )
+        {
+          c = valordistancia2[x];
+          c1 = 'd';
+          pos = x;
+        }
+    }
+
+    for (int x = 0 ; x < valorintermedio2.Count; x++)
+    {
+       if (valorintermedio2[x] > c )
+        {
+          c = valorintermedio2[x];
+          c1 = 'i';
+          pos = 0;
+        }
+    }
+
+      if (pos == int.MaxValue) return ;
+
+      if(c1 == 'd')   valordistancia2[pos] = -1;
+      if(c1 == 'i')   valorintermedio2[pos] = -1;  
+
+    }
+
+    
+
+  }
+
+}
+
+void efectomorir( detall script, bool tocajugarenelframe)
+{
+  if(script.nombrecarta == "golem de elixir")
+  {
+
+   // Debug.Log("soiiiiiiii");
+    GameObject golem = new GameObject();
+    for(int x = 0; x < mazo.Count; x++)
+    {
+      detall aux = mazo[x].GetComponent<detall>();
+      if(aux.nombrecarta == script.nombrecarta) 
+      {
+        golem = mazo[x];
+        break;
+      }
+    }
+
+    if(tocajugarenelframe)
+    {
+      Button aux;
+      if(actualizacioncuarpoacuerpo1.Count < 8) 
+      aux = cuerpoacuerpo1[actualizacioncuarpoacuerpo1.Count].GetComponentInChildren<Button>();
+      
+      else return;
+      
+     
+      actualizacioncuarpoacuerpo1.Add(golem);
+      aux.image.enabled = true; 
+      
+      if(actualizacioncuarpoacuerpo1.Count < 8) 
+      aux = cuerpoacuerpo1[actualizacioncuarpoacuerpo1.Count].GetComponentInChildren<Button>();
+      
+      else return;
+      actualizacioncuarpoacuerpo1.Add(golem);  
+      aux.image.enabled = true;
+      valorcuerpoacuerpo1.Add(3);
+      valorcuerpoacuerpo1.Add(3);
+    }
+
+    else
+    {
+      Button aux;
+      if(actualizacioncuerpoacuerpo2.Count < 8 )
+      aux = cuerpoacuerpo2[actualizacioncuerpoacuerpo2.Count].GetComponentInChildren<Button>();
+
+      else return;
+   
+      actualizacioncuerpoacuerpo2.Add(golem);
+      aux.image.enabled = true; 
+      valorcuerpoacuerpo2.Add(3);
+     
+      if(actualizacioncuerpoacuerpo2.Count < 8 )
+      aux = cuerpoacuerpo2[actualizacioncuerpoacuerpo2.Count].GetComponentInChildren<Button>();
+
+      else return;
+
+      actualizacioncuerpoacuerpo2.Add(golem);  
+      aux.image.enabled = true;
+      valorcuerpoacuerpo2.Add(3);
+    } 
+
+  }
 }
 
 
@@ -301,6 +755,8 @@ public void jugarcarta2( )
 
 public void jugarjefe( int m )
 {
+
+ if (toquesenuelo) return;
 
  cdepass ++;
   
@@ -401,17 +857,17 @@ private void Start()
 
 
 
-void funcionatualizar(List <GameObject> listvisual , List <GameObject> listaaux){
+void funcionatualizar(List <GameObject> listvisual , List <GameObject> listaaux){ 
 
 
   for(int x=0 ; x<listaaux.Count ; x++)
   {
    Button aux = listvisual[x].GetComponentInChildren<Button>();
-
-   if(!aux.GetComponent<Image>().enabled) 
-   aux.GetComponent<Image>().enabled = true;
-
    Button aux2 = listaaux[x].GetComponentInChildren<Button>();
+
+   //if(!aux.GetComponent<Image>().enabled) 
+   //aux.GetComponent<Image>().enabled = true;
+
    aux.image.sprite = aux2.image.sprite;
   }
 
@@ -425,7 +881,7 @@ void funcionatualizar(List <GameObject> listvisual , List <GameObject> listaaux)
 }
 
 
-int actualizarpuntos( List <int> listaval, List <GameObject> listavisual)
+int actualizarpuntos( List <int> listaval, List <GameObject> listavisual, bool tocajugarenelframe)
 {
 
   int c =0;
@@ -437,10 +893,15 @@ int actualizarpuntos( List <int> listaval, List <GameObject> listavisual)
     if(listaval.Count == x)
     break;
 
-    if(listaval[x]<=0)
+    if(listaval[x]<0)
     {
+
+     detall aux = listavisual[x].GetComponent<detall>();
+     
       listavisual.RemoveAt(x);
       listaval.RemoveAt(x);
+
+  efectomorir(aux, tocajugarenelframe); 
 
       goto salto;
     }
@@ -472,21 +933,21 @@ void actualizacion()
 
   int c=0;
 
- c+= actualizarpuntos(valorcuerpoacuerpo1,actualizacioncuarpoacuerpo1);
+ c+= actualizarpuntos(valorcuerpoacuerpo1,actualizacioncuarpoacuerpo1, true);
 
- c+= actualizarpuntos(valordistancia1, actualizaciondistancia1);
+ c+= actualizarpuntos(valordistancia1, actualizaciondistancia1, true);
 
- c+= actualizarpuntos(valorintermedio1, actualizacionintermedia1);
+ c+= actualizarpuntos(valorintermedio1, actualizacionintermedia1, true);
 
   puntaje1.text = c.ToString();
 
   c=0;
 
- c+= actualizarpuntos(valorcuerpoacuerpo2,actualizacioncuerpoacuerpo2);
+ c+= actualizarpuntos(valorcuerpoacuerpo2,actualizacioncuerpoacuerpo2, false);
 
- c+= actualizarpuntos(valordistancia2, actualizaciondistancia2);
+ c+= actualizarpuntos(valordistancia2, actualizaciondistancia2, false);
 
- c+= actualizarpuntos(valorintermedio2, actualizacionintermedia2);
+ c+= actualizarpuntos(valorintermedio2, actualizacionintermedia2, false);
 
   puntaje2.text = c.ToString();
 
@@ -534,6 +995,9 @@ void limpiarcampo()
  valordistancia2.Clear();
  valorintermedio1.Clear();
  valorintermedio2.Clear();
+
+  for(int x =0; x<asediobutton.Count; x++) asediobutton[x].image.sprite=muestracartaponerasedio;
+
 }
   
 // verificar si alguien gano alguna partida
@@ -622,14 +1086,30 @@ private void Update()
 
   cartagrande.GetComponent<Image>().enabled = true;
   cartagrande.sprite = aux.image.sprite;
-  tipodecarta.text += script.tipo;
-
+  
+  tipodecarta.GetComponent<Image>().enabled = true;
+  if(script.tipo == 'c')
+  {
+    tipodecarta.sprite = cartacuerpoacuerpo;
+  }
+  if(script.tipo == 'd')
+  {
+    tipodecarta.sprite = cartadistancia;
+  }
+  if(script.tipo == 'i')
+  {
+    tipodecarta.sprite = cartaintermedia;
+  }
+  if(script.tipo == 'a')
+  {
+    tipodecarta.sprite = muestracartaponerasedio;
+  }
 }
 
 public void quitarcartagrande()
 {
   cartagrande.GetComponent<Image>().enabled = false;
-  tipodecarta.text="";
+  tipodecarta.GetComponent<Image>().enabled = false;
 
 }
 

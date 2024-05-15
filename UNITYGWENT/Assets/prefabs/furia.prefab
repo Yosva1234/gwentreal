@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 4
   tipo: 97
+  nombrecarta: furia
 --- !u!1 &6984831172370233722
 GameObject:
   m_ObjectHideFlags: 0

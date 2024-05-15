@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 5
   tipo: 105
+  nombrecarta: canon
 --- !u!1 &3730511304815157924
 GameObject:
   m_ObjectHideFlags: 0

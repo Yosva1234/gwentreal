@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LP: 4
   tipo: 105
+  nombrecarta: dragon electrico
 --- !u!1 &8796070673428327029
 GameObject:
   m_ObjectHideFlags: 0
