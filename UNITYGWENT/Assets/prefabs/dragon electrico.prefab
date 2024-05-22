@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3879191846020474055}
   - component: {fileID: 8755397920961833305}
+  - component: {fileID: 2297756177020104600}
   m_Layer: 0
   m_Name: dragon electrico
   m_TagString: Untagged
@@ -46,8 +47,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LP: 4
-  tipo: 105
   nombrecarta: dragon electrico
+  efectoc: trae a tu mano una carta de espiritu electrico al ser invocada y destruye
+    la carta con menor cantidad de puntos en la fila de cc en el campo contrario
+  cc: 0
+  ai: 1
+  ad: 0
+  asedio: 0
+--- !u!114 &2297756177020104600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3536067280720647971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07b919dd73dd6142a6773fb4aa24edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limpiarfila: 0
+  limpiarcc: 0
+  limpiarad: 0
+  limpiarin: 0
+  modificarfila: 0
+  modificarcc: 0
+  modificarad: 0
+  modificarin: 0
+  valormodificar: 0
+  traercartamano: 1
+  nombrecartatraermano: {fileID: 6134636052696088702, guid: f26a8ae40d256df46bf843fabca9628a, type: 3}
+  traercartacampo: 0
+  nombrecartatraercampo: {fileID: 0}
+  jugardoble: 0
+  destruirmenor: 1
+  menorcc: 1
+  menorad: 0
+  menorin: 0
+  destruirmayor: 0
+  mayorcc: 0
+  mayorad: 0
+  mayorin: 0
 --- !u!1 &8796070673428327029
 GameObject:
   m_ObjectHideFlags: 0

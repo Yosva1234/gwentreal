@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6977071941693793316}
   - component: {fileID: 4626440925215162698}
+  - component: {fileID: 9076833875356343423}
   m_Layer: 0
   m_Name: espiritu electrico
   m_TagString: Untagged
@@ -166,5 +167,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LP: 1
-  tipo: 105
   nombrecarta: espiritu electrico
+  efectoc: al invocar esta carta trae a la mano una carta de gigante electrico
+  cc: 0
+  ai: 1
+  ad: 0
+  asedio: 0
+--- !u!114 &9076833875356343423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6134636052696088702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07b919dd73dd6142a6773fb4aa24edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limpiarfila: 0
+  limpiarcc: 0
+  limpiarad: 0
+  limpiarin: 0
+  modificarfila: 0
+  modificarcc: 0
+  modificarad: 0
+  modificarin: 0
+  valormodificar: 0
+  traercartamano: 0
+  nombrecartatraermano: {fileID: 0}
+  traercartacampo: 1
+  nombrecartatraercampo: {fileID: 8203056739263975161, guid: 6294c8fbe68b8fa488a0a0fbb9e09c95, type: 3}
+  jugardoble: 0
+  destruirmenor: 0
+  menorcc: 0
+  menorad: 0
+  menorin: 0
+  destruirmayor: 0
+  mayorcc: 0
+  mayorad: 0
+  mayorin: 0

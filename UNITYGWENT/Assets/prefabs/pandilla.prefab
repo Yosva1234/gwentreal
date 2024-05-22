@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3920662636734406276}
   - component: {fileID: 5040341139964242739}
+  - component: {fileID: -3044944054048722880}
   m_Layer: 0
   m_Name: pandilla
   m_TagString: Untagged
@@ -166,5 +167,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LP: 3
-  tipo: 105
   nombrecarta: pandilla
+  efectoc: destruye la carta con mayor cantidad de puntos de la fila de ai de la
+    fila del contrario
+  cc: 0
+  ai: 1
+  ad: 0
+  asedio: 0
+--- !u!114 &-3044944054048722880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9214086859624629860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07b919dd73dd6142a6773fb4aa24edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limpiarfila: 0
+  limpiarcc: 0
+  limpiarad: 0
+  limpiarin: 0
+  modificarfila: 0
+  modificarcc: 0
+  modificarad: 0
+  modificarin: 0
+  valormodificar: 0
+  traercartamano: 0
+  nombrecartatraermano: {fileID: 0}
+  traercartacampo: 0
+  nombrecartatraercampo: {fileID: 0}
+  jugardoble: 0
+  destruirmenor: 0
+  menorcc: 0
+  menorad: 0
+  menorin: 0
+  destruirmayor: 1
+  mayorcc: 0
+  mayorad: 0
+  mayorin: 1

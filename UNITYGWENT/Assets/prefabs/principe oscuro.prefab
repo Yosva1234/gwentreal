@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1825923317528330061}
   - component: {fileID: 8691587566232347423}
+  - component: {fileID: -163051998190161493}
   m_Layer: 0
   m_Name: principe oscuro
   m_TagString: Untagged
@@ -166,5 +167,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LP: 4
-  tipo: 99
   nombrecarta: principe oscuro
+  efectoc: destruye la carta con menor catntidad de puntos de la fila de ad del campo
+    del contrario
+  cc: 1
+  ai: 0
+  ad: 0
+  asedio: 0
+--- !u!114 &-163051998190161493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7334869104348084777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07b919dd73dd6142a6773fb4aa24edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limpiarfila: 0
+  limpiarcc: 0
+  limpiarad: 0
+  limpiarin: 0
+  modificarfila: 1
+  modificarcc: 1
+  modificarad: 0
+  modificarin: 0
+  valormodificar: -1
+  traercartamano: 0
+  nombrecartatraermano: {fileID: 0}
+  traercartacampo: 0
+  nombrecartatraercampo: {fileID: 0}
+  jugardoble: 0
+  destruirmenor: 1
+  menorcc: 0
+  menorad: 1
+  menorin: 0
+  destruirmayor: 0
+  mayorcc: 0
+  mayorad: 0
+  mayorin: 0

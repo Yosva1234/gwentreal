@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2692901848259388370}
   - component: {fileID: 7185773490936105522}
+  - component: {fileID: 7952755765983002764}
   m_Layer: 0
   m_Name: barril de barbarol
   m_TagString: Untagged
@@ -165,6 +166,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c33d9763e45784fae4fff91e95bae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LP: -1
-  tipo: 97
+  LP: -2
   nombrecarta: barril de barbaros
+  efectoc: rebaja -1 ptos a cada carta en la fila que elijas
+  cc: 0
+  ai: 0
+  ad: 0
+  asedio: 1
+--- !u!114 &7952755765983002764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7306206639406559996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07b919dd73dd6142a6773fb4aa24edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limpiarfila: 0
+  limpiarcc: 0
+  limpiarad: 0
+  limpiarin: 0
+  modificarfila: 0
+  modificarcc: 0
+  modificarad: 0
+  modificarin: 0
+  valormodificar: 0
+  traercartamano: 0
+  nombrecartatraermano: {fileID: 0}
+  traercartacampo: 0
+  nombrecartatraercampo: {fileID: 0}
+  jugardoble: 0
+  traermontromorir: 0
+  traermorir: {fileID: 0}

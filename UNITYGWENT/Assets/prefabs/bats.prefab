@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4082752491715689654}
   - component: {fileID: 1299551948712786428}
+  - component: {fileID: -3490871961821867549}
   m_Layer: 0
   m_Name: bats
   m_TagString: Untagged
@@ -46,8 +47,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LP: 2
-  tipo: 105
   nombrecarta: bats
+  efectoc: trae atu mano una carta de hielo al ser jugada y vuelves a jugar
+  cc: 0
+  ai: 1
+  ad: 0
+  asedio: 0
+--- !u!114 &-3490871961821867549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794020578993820016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07b919dd73dd6142a6773fb4aa24edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limpiarfila: 0
+  limpiarcc: 1
+  limpiarad: 0
+  limpiarin: 0
+  modificarfila: 0
+  modificarcc: 0
+  modificarad: 0
+  modificarin: 0
+  valormodificar: 0
+  traercartamano: 1
+  nombrecartatraermano: {fileID: 3957628762749502807, guid: caa66b66850e3694287959471bb147fb, type: 3}
+  traercartacampo: 0
+  nombrecartatraercampo: {fileID: 0}
+  jugardoble: 1
+  destruirmenor: 0
+  menorcc: 0
+  menorad: 0
+  menorin: 0
+  destruirmayor: 0
+  mayorcc: 0
+  mayorad: 0
+  mayorin: 0
 --- !u!1 &5776292244523367886
 GameObject:
   m_ObjectHideFlags: 0

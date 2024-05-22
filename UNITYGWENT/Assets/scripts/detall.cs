@@ -5,7 +5,10 @@ using UnityEngine;
 public class detall : MonoBehaviour
 {
    public int LP;
-   public char tipo;
    public string nombrecarta;
-
+   public string efectoc;
+   public bool cc;
+   public bool ai;
+   public bool ad;
+   public bool asedio;  
 }

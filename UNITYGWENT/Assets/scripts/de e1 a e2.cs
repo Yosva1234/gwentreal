@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+ namespace Gwent{
 public class SceneLoader : MonoBehaviour
 {
     public string sceneToLoad;
@@ -10,3 +11,4 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(sceneToLoad);
     }
 }
+ }

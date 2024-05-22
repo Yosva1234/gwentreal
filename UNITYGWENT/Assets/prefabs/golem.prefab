@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8501496289456270924}
   - component: {fileID: 6550173981653805746}
+  - component: {fileID: 8982571740402597337}
   m_Layer: 0
   m_Name: golem
   m_TagString: Untagged
@@ -166,5 +167,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LP: 8
-  tipo: 99
   nombrecarta: golem
+  efectoc: 
+  cc: 1
+  ai: 0
+  ad: 0
+  asedio: 0
+--- !u!114 &8982571740402597337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4764837491531094869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07b919dd73dd6142a6773fb4aa24edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limpiarfila: 0
+  limpiarcc: 0
+  limpiarad: 0
+  limpiarin: 0
+  modificarfila: 0
+  modificarcc: 0
+  modificarad: 0
+  modificarin: 0
+  valormodificar: 0
+  traercartamano: 0
+  nombrecartatraermano: {fileID: 0}
+  traercartacampo: 0
+  nombrecartatraercampo: {fileID: 0}
+  jugardoble: 0
+  destruirmenor: 0
+  menorcc: 0
+  menorad: 0
+  menorin: 0
+  destruirmayor: 0
+  mayorcc: 0
+  mayorad: 0
+  mayorin: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8915561940080496679}
   - component: {fileID: 9202760879554321725}
+  - component: {fileID: -405532442700514953}
   m_Layer: 0
   m_Name: terremoto
   m_TagString: Untagged
@@ -46,8 +47,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LP: -3
-  tipo: 97
   nombrecarta: terremoto
+  efectoc: resta -3 a cada carta de la fila que escojas
+  cc: 0
+  ai: 0
+  ad: 0
+  asedio: 1
+--- !u!114 &-405532442700514953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728388720549815564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07b919dd73dd6142a6773fb4aa24edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limpiarfila: 0
+  limpiarcc: 0
+  limpiarad: 0
+  limpiarin: 0
+  modificarfila: 0
+  modificarcc: 0
+  modificarad: 0
+  modificarin: 0
+  valormodificar: 0
+  traercartamano: 0
+  nombrecartatraermano: {fileID: 0}
+  traercartacampo: 0
+  nombrecartatraercampo: {fileID: 0}
+  jugardoble: 0
+  traermontromorir: 0
+  traermorir: {fileID: 0}
 --- !u!1 &5918506761319980097
 GameObject:
   m_ObjectHideFlags: 0

@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 999831946128708017}
   - component: {fileID: 2870159178951075107}
+  - component: {fileID: -2702267335792743233}
   m_Layer: 0
   m_Name: bombardero
   m_TagString: Untagged
@@ -166,5 +167,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LP: 2
-  tipo: 105
   nombrecarta: bombardero
+  efectoc: le rebaja 1 de vida a cada fila del conrtario
+  cc: 0
+  ai: 1
+  ad: 0
+  asedio: 0
+--- !u!114 &-2702267335792743233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103996977580489314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07b919dd73dd6142a6773fb4aa24edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limpiarfila: 0
+  limpiarcc: 0
+  limpiarad: 0
+  limpiarin: 0
+  modificarfila: 1
+  modificarcc: 1
+  modificarad: 1
+  modificarin: 1
+  valormodificar: -1
+  traercartamano: 0
+  nombrecartatraermano: {fileID: 0}
+  traercartacampo: 0
+  nombrecartatraercampo: {fileID: 0}
+  jugardoble: 0
+  destruirmenor: 0
+  menorcc: 0
+  menorad: 0
+  menorin: 0
+  destruirmayor: 0
+  mayorcc: 0
+  mayorad: 0
+  mayorin: 0

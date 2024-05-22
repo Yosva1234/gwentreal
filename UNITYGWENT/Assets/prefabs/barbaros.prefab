@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7353923344133612170}
   - component: {fileID: 1153978059955398623}
+  - component: {fileID: 8791867745901712439}
   m_Layer: 0
   m_Name: barbaros
   m_TagString: Untagged
@@ -166,5 +167,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LP: 5
-  tipo: 99
   nombrecarta: barbaros
+  efectoc: al invocar esta carta se duplica en el campo
+  cc: 1
+  ai: 0
+  ad: 0
+  asedio: 0
+--- !u!114 &8791867745901712439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790246344471319757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07b919dd73dd6142a6773fb4aa24edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limpiarfila: 0
+  limpiarcc: 0
+  limpiarad: 0
+  limpiarin: 0
+  modificarfila: 0
+  modificarcc: 0
+  modificarad: 0
+  modificarin: 0
+  valormodificar: 0
+  traercartamano: 0
+  nombrecartatraermano: {fileID: 0}
+  traercartacampo: 1
+  nombrecartatraercampo: {fileID: 7790246344471319757}
+  jugardoble: 0
+  traermontromorir: 0
+  traermorir: {fileID: 0}

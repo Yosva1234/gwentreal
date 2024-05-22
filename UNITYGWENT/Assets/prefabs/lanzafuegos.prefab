@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2081528036975819987}
   - component: {fileID: 4802085583079796754}
+  - component: {fileID: 4243018350091365192}
   m_Layer: 0
   m_Name: lanzafuegos
   m_TagString: Untagged
@@ -46,8 +47,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LP: 3
-  tipo: 100
   nombrecarta: lanzafuegos
+  efectoc: rebaja 2 de vida a las filas de ad y ai del campo contrario
+  cc: 0
+  ai: 0
+  ad: 1
+  asedio: 0
+--- !u!114 &4243018350091365192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159589037700075404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07b919dd73dd6142a6773fb4aa24edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limpiarfila: 0
+  limpiarcc: 0
+  limpiarad: 0
+  limpiarin: 0
+  modificarfila: 1
+  modificarcc: 0
+  modificarad: 1
+  modificarin: 1
+  valormodificar: -2
+  traercartamano: 0
+  nombrecartatraermano: {fileID: 0}
+  traercartacampo: 0
+  nombrecartatraercampo: {fileID: 0}
+  jugardoble: 0
+  destruirmenor: 0
+  menorcc: 0
+  menorad: 0
+  menorin: 0
+  destruirmayor: 0
+  mayorcc: 0
+  mayorad: 0
+  mayorin: 0
 --- !u!1 &3786492060863001361
 GameObject:
   m_ObjectHideFlags: 0
